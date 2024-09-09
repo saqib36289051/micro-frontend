@@ -69,11 +69,14 @@ module.exports = (_, argv) => ({
       name: "main_container",
       filename: "remoteEntry.js",
       remotes: {
-        "grievence_desk": "grievence_desk@http://localhost:3000/remoteEntry.js",
+        grievence_desk: "grievence_desk@http://localhost:3000/remoteEntry.js",
         App: "grievence_desk@http://localhost:3000/remoteEntry.js",
       },
       exposes: {
         "./store": "./src/store/store.ts",
+        "./BASE_URL": "./src/constants/constants.ts",
+        "./StoreProvider": "./src/store/storeProvider.tsx",
+        "./useReduxHooks":"./src/hooks/useReduxHooks.ts",
       },
       shared: {
         ...deps,
@@ -84,14 +87,6 @@ module.exports = (_, argv) => ({
         "react-dom": {
           singleton: true,
           requiredVersion: deps["react-dom"],
-        },
-        redux: {
-          singleton: true,
-          requiredVersion: deps.redux,
-        },
-        "react-redux": {
-          singleton: true,
-          requiredVersion: deps["react-redux"],
         },
       },
     }),

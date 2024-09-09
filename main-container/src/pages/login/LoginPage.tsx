@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { post } from '../../store/post'
 import { useAppDispatch } from '../../hooks/useReduxHooks'
 import { get } from '../../store/get'
+import { setUser } from '../../store/slice'
+import toast from 'react-hot-toast'
 
 
 const LoginPage = () => {
@@ -15,27 +17,40 @@ const LoginPage = () => {
     const [password, setPassword] = React.useState('')
     const handleLogin = async () => {
         if (email && password) {
+            toast.loading('Logging in...')
             await post('/Auth/SignIn', {
                 email,
                 password
             }).then(async (res) => {
                 if (res) {
-                    localStorage.setItem('user', JSON.stringify(res))
                     dispatch({
-                        type: "setting/setUser",
+                        type: setUser.type,
                         payload: res
                     })
 
                     await get('/Auth').then((response) => {
                         if (response) {
+                            toast.success('Logged in successfully')
                             dispatch({
-                                type: "setting/setUser",
+                                type: setUser.type,
                                 payload: response
                             })
+
+                            const iUserInfo = {
+                                ...res,
+                                ...response
+                            }
+                            localStorage.setItem('user', JSON.stringify(iUserInfo))
                             router('/grievence');
                         }
+                    }).catch((error) => {
+                        toast.error(error)
                     })
                 }
+            }).catch((error) => {
+                toast.error(error)
+            }).finally(() => {
+                toast.dismiss()
             })
         }
     }

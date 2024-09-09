@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import RouteContainer from './components/container/RouteContainer'
 import LoginPage from './pages/login/LoginPage'
 import { useAppSelector } from './hooks/useReduxHooks'
+import { Toaster } from 'react-hot-toast'
 
 
 const App = () => {
@@ -12,14 +13,17 @@ const App = () => {
   const isLoggedIn = user?.token
 
   return (
-    <Routes>
-      {
-        isLoggedIn
-          ? <Route path="/*" element={<RouteContainer />} />
-          : <Route path="/*" element={<LoginPage />} />
-      }
-      {!isLoggedIn && <Route path="/login" element={<LoginPage />} />}
-    </Routes>
+    <>
+      <Toaster />
+      <Routes>
+        {
+          isLoggedIn
+            ? <Route path="/*" element={<RouteContainer />} />
+            : <Route path="/*" element={<LoginPage />} />
+        }
+        {!isLoggedIn && <Route path="/login" element={<LoginPage />} />}
+      </Routes>
+    </>
   )
 }
 

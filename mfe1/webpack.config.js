@@ -66,6 +66,9 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         main_container: "main_container@http://localhost:3010/remoteEntry.js",
+        BASE_URL: "main_container@http://localhost:3010/remoteEntry.js",
+        StoreProvider: "main_container@http://localhost:3010/remoteEntry.js",
+        useReduxHooks: "main_container@http://localhost:3010/remoteEntry.js",
       },
       exposes: {
         "./App": "./src/App.tsx",
@@ -79,14 +82,6 @@ module.exports = (_, argv) => ({
         "react-dom": {
           singleton: true,
           requiredVersion: deps["react-dom"],
-        },
-        redux: {
-          singleton: true,
-          requiredVersion: deps.redux,
-        },
-        "react-redux": {
-          singleton: true,
-          requiredVersion: deps["react-redux"],
         },
       },
     }),
