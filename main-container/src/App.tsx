@@ -13,7 +13,7 @@ const App = () => {
   const isLoggedIn = user?.token
 
   return (
-    <>
+    <div className='m-auto'>
       <Toaster />
       <Routes>
         {
@@ -23,7 +23,7 @@ const App = () => {
         }
         {!isLoggedIn && <Route path="/login" element={<LoginPage />} />}
       </Routes>
-    </>
+    </div>
   )
 }
 
