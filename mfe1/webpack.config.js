@@ -71,7 +71,8 @@ module.exports = (_, argv) => ({
         useReduxHooks: "main_container@http://localhost:3010/remoteEntry.js",
       },
       exposes: {
-        "./App": "./src/App.tsx",
+        "./addGrievence": "./src/pages/grievence/addGrievence.tsx",
+        "./grievenceDesk": "./src/pages/grievence/grievenceDesk.tsx",
       },
       shared: {
         ...deps,

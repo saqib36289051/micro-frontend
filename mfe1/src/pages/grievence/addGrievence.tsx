@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { post } from '../store/post'
-import { get } from '../store/get'
-import { Label } from '../components/ui/label';
-import { Button } from '../components/ui/button';
-import { Textarea } from '../components/ui/textarea';
+import { post } from '../../store/post'
+import { get } from '../../store/get'
+import { Label } from '../../components/ui/label';
+import { Button } from '../../components/ui/button';
+import { Textarea } from '../../components/ui/textarea';
 import toast from 'react-hot-toast';
 
 type GrievenceDesk = {
@@ -12,7 +12,7 @@ type GrievenceDesk = {
     id: string;
 }
 
-const GrievenceDesk = () => {
+const AddGrievence = () => {
     const [data, setData] = React.useState<GrievenceDesk[]>([])
     const [checked, setChecked] = React.useState<string[]>([])
     const [showOtherInput, setShowOtherInput] = React.useState(false)
@@ -23,8 +23,10 @@ const GrievenceDesk = () => {
     }, [])
 
     async function fetchInitialData() {
+        toast.loading("loading...")
         await get('/GrievanceType').then((response) => {
             setData(response)
+            toast.dismiss()
         })
     }
 
@@ -74,31 +76,40 @@ const GrievenceDesk = () => {
     }
 
     return (
-        <div className='p-8 rounded-lg bg-white shadow flex flex-col space-y-5'>{
-            data?.map((item, index) => {
-                return (
-                    <div key={index} className='flex space-x-3'>
-                        <input type='checkbox' key={index} id={item.id} name={item.name} value={item.id} onChange={handleCheckboxChange} checked={checked.includes(item.id.toString())} />
-                        <Label htmlFor={item.id}>{item.name}</Label>
-                    </div>
-                )
-            })
-        }
-            {showOtherInput ? (
-                <Textarea
-                    className=""
-                    placeholder="Please specify"
-                    value={otherValue}
-                    onChange={handleOtherInputChange}
-                ></Textarea>
-            ) : (
-                ""
-            )}
-            <Button onClick={onSubmit} className="btn btn-success mt-3 self-start">
-                Submit
-            </Button>
-        </div>
+        <>
+            {
+                data?.length > 0 &&
+                <div className='p-4 m-2 rounded-lg bg-white shadow space-y-4 '>
+                    {
+                        data?.map((item, index) => {
+                            return (
+                                <div key={index} className='flex space-x-3'>
+                                    <input type='checkbox' key={index} id={item.id} name={item.name} value={item.id} onChange={handleCheckboxChange} checked={checked.includes(item.id.toString())} />
+                                    <Label htmlFor={item.id}>{item.name}</Label>
+                                </div>
+                            )
+                        })
+                    }
+
+                    {showOtherInput ? (
+                        <Textarea
+                            className=""
+                            placeholder="Please specify"
+                            value={otherValue}
+                            onChange={handleOtherInputChange}
+                        ></Textarea>
+                    ) : (
+                        ""
+                    )}
+
+                    <Button onClick={onSubmit} className="btn btn-success mt-3">
+                        Submit
+                    </Button>
+                </div>
+            }
+        </>
+
     )
 }
 
-export default GrievenceDesk
+export default AddGrievence
