@@ -17,7 +17,6 @@ export const GrievenceList = [
           ))
         }
       </>,
-      maxWidth: "300px",
       wrap: true
   },
   {
