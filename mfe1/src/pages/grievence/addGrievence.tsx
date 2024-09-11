@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { post } from '../../store/post'
-import { get } from '../../store/get'
+import { post, get } from 'redux_store/sagas'
 import { Label } from '../../components/ui/label';
 import { Button } from '../../components/ui/button';
 import { Textarea } from '../../components/ui/textarea';

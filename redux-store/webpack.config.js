@@ -9,7 +9,7 @@ const printCompilationMessage = require("./compilation.config.js");
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3000/",
+    publicPath: "http://localhost:3002/",
   },
 
   resolve: {
@@ -17,7 +17,7 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 3000,
+    port: 3002,
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, "src")],
     onListening: function (devServer) {
@@ -62,13 +62,14 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "grievence_desk",
+      name: "redux_store",
       filename: "remoteEntry.js",
-      remotes: {
-        redux_store: "redux_store@http://localhost:3002/remoteEntry.js",
-      },
+      remotes: {},
       exposes: {
-        "./GrievenceApp" : "./src/App.tsx"
+        "./store": "./src/store/store.ts",
+        "./storeProvider": "./src/store/storeProvider.tsx",
+        "./actions": "./src/store/slice/index.ts",
+        "./sagas": "./src/store/sagas/index.ts",
       },
       shared: {
         ...deps,

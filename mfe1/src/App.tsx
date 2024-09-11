@@ -1,18 +1,19 @@
 import React from 'react'
-import './index.scss'
-// import store from 'main_container/store'
-import { useAppSelector } from 'main_container/useReduxHooks'
+import './index.css'
+import AddGrievence from './pages/grievence/addGrievence'
 import { Toaster } from 'react-hot-toast'
+import { Route, Routes } from 'react-router-dom'
+import GrievenceDesk from './pages/grievence/grievenceDesk'
 
 const App = () => {
-  const { user } = useAppSelector(state => state.setting)
   return (
-    <>
+    <div>
       <Toaster />
-      <div className="mt-10 text-3xl mx-auto max-w-6xl">
-        <p>this is mfe1</p>
-      </div>
-    </>
+      <Routes>
+        <Route path="/" element={<GrievenceDesk />} />
+        <Route path="/add" element={<AddGrievence />} />
+      </Routes>
+    </div>
   )
 }
 
