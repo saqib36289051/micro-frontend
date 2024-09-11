@@ -29,7 +29,6 @@ const customStyles = {
       backgroundColor: 'rgb(230, 244, 244)',
       borderBottomColor: '#FFFFFF',
       borderTopColor: '#FFFFFF',
-      borderRadius: '25px',
       outline: '1px solid #FFFFFF',
     },
   },
@@ -41,7 +40,6 @@ const customStyles = {
       color: "#162E4A",
       paddingTop: 10,
       fontSize: "14px",
-      
     },
   },
   cells: {

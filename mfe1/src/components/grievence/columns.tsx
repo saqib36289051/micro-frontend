@@ -13,11 +13,11 @@ export const GrievenceList = [
       <>
         {
           row.types.map((item) => (
-            <Badge>{item.customValue}</Badge>
+            <Badge key={item.id}>{item.customValue}</Badge>
           ))
         }
       </>,
-      wrap: true
+    wrap: true
   },
   {
     name: "Date",

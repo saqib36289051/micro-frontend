@@ -51,7 +51,7 @@ const Sidebar = () => {
             {
                 sidebarLinks.map((item, index) => {
                     return (
-                        <NavLink to={item.route} className='cursor-default'
+                        <NavLink key={item.id} to={item.route} className='cursor-default'
                         >
                             {
                                 selectedTab === item.id ? (
